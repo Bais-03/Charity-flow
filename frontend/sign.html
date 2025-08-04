@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Goods for Good</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --primary-dark: #1d7874;
+            --secondary: #e76f51;
+            --light: #f8f9fa;
+            --dark: #264653;
+            --text: #333;
+            --text-light: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4f1f0 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .signup-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .signup-hero {
+            flex: 1;
+            background:
+                linear-gradient(rgba(42, 157, 143, 0.3), rgba(42, 157, 143, 0.3)),
+                url('image2.jpg') no-repeat center center;
+            background-size: cover;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .signup-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+            margin-top: 100px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+            margin-right: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .hero-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Signup Form Section */
+        .signup-form-container {
+            margin-left: 50%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(228, 241, 240, 0.9) 100%);
+            position: relative;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        .signup-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(42, 157, 143, 0.2);
+        }
+
+        .signup-card:hover {
+            box-shadow: 0 15px 35px rgba(42, 157, 143, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .welcome-message {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .welcome-message h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .welcome-message h3:hover {
+            color: var(--primary-dark);
+        }
+
+        .welcome-message p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .form-group label:hover {
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:hover,
+        .form-group select:hover {
+            border-color: var(--primary);
+            background-color: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.1);
+            background-color: white;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary);
+        }
+
+        .terms-conditions {
+            display: flex;
+            align-items: flex-start;
+            margin: 1.5rem 0;
+        }
+
+        .terms-conditions input {
+            margin-right: 8px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            margin-top: 3px;
+        }
+
+        .terms-conditions label {
+            cursor: pointer;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .terms-conditions:hover label {
+            color: var(--dark);
+        }
+
+        .terms-conditions a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .terms-conditions a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+            letter-spacing: 0.5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #eee;
+        }
+
+        .divider::before {
+            margin-right: 1rem;
+        }
+
+        .divider::after {
+            margin-left: 1rem;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn.google {
+            color: #DB4437;
+        }
+
+        .social-btn.facebook {
+            color: #4267B2;
+        }
+
+        .social-btn.apple {
+            color: #000;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+            color: var(--primary-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .signup-container {
+                flex-direction: column;
+            }
+
+            .signup-hero {
+                position: relative;
+                width: 100%;
+                height: 300px;
+                padding: 3rem 2rem;
+                background-attachment: scroll;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                margin-top: 0;
+            }
+
+            .signup-form-container {
+                margin-left: 0;
+                padding: 2rem 1rem;
+            }
+
+            .signup-card {
+                width: 100%;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="signup-hero">
+            <div class="hero-content">
+                <div class="logo">
+                    <div class="logo-circle">G</div>
+                    <div class="logo-text">Goods for Good</div>
+                </div>
+                <h2>Join Our Community of Givers</h2>
+                <p>Create an account to start making a difference today</p>
+            </div>
+        </div>
+
+        <div class="signup-form-container">
+            <div class="signup-card">
+                <div class="welcome-message">
+                    <h3>Create Your Account</h3>
+                    <p>Fill in your details to get started</p>
+                </div>
+
+                <form id="signupForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Create a password" required>
+                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                            <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" placeholder="Enter your full address" required>
+                    </div>
+
+                    <div class="terms-conditions">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a></label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Create Account</button>
+
+                    <div class="divider">or sign up with</div>
+
+                    <div class="social-login">
+                        <div class="social-btn google">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="social-btn facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-btn apple">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="login-footer">
+                    Already have an account? <a href="login.html">Log in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password toggle functionality
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function() {
+                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                password.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        if (toggleConfirmPassword) {
+            toggleConfirmPassword.addEventListener('click', function() {
+                const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPassword.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        // Form submission
+        const signupForm = document.getElementById('signupForm');
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add form validation and submission logic here
+                alert('Account created successfully!');
+            });
+        }
+    </script>
+</body>
+</html>
