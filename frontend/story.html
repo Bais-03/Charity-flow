@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="story.css">
+</head>
+<body>
+
+    <section class="story-form-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Share Your Story</h2>
+                <p>Your contribution, no matter the size, creates a ripple effect of positive change. We'd love to hear how your act of giving has impacted you. By sharing your story, you inspire others to join our community and make a difference.</p>
+            </div>
+
+            <form class="story-form" id="storyForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="story-type">Type of Story</label>
+                    <select id="story-type" name="story-type" required>
+                        <option value="">Select an option</option>
+                        <option value="financial">Financial Donation</option>
+                        <option value="goods">Goods Donation (e.g., clothes, food)</option>
+                        <option value="volunteer">Volunteer Experience</option>
+                        <option value="skills">Donating Skills</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="story-title">Story Title</label>
+                    <input type="text" id="story-title" name="story-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="story">Your Story</label>
+                    <textarea id="story" name="story" rows="8" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="photo">Upload a Photo (Optional)</label>
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                </div>
+                <button type="submit" class="submit-btn">Share My Story</button>
+            </form>
+
+            <div id="responseMessage" class="response-message" style="display: none;">
+                <div class="response-header">
+                    <h2>Your Story Matters!</h2>
+                    <p>Thank you for sharing your incredible story with us. Your words are a powerful reminder of the impact we can have when we come together. We'll review your submission and may feature it on our website and social media to inspire our community.</p>
+                </div>
+                <div class="response-details">
+                    <h4>What happens next?</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> We'll send you a confirmation email shortly.</li>
+                        <li><i class="fas fa-search-plus"></i> Our team will review your story. If it's selected to be featured, we'll reach out to you.</li>
+                        <li><i class="fas fa-share-alt"></i> You can continue to browse our website and see the other inspiring stories from our community.</li>
+                    </ul>
+                </div>
+                <p class="final-message">We are so grateful for your support and generosity. It's people like you who make our mission possible.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="story.js"></script>
+</body>
+</html>
