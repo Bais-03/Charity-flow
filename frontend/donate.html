@@ -1,69 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Donate | CharityFlow</title>
-  <link rel="stylesheet" href="donate.css" />
-  <script src="donate.js"></script>
+  <meta charset="UTF-8">
+  <title>Donate an Item</title>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo-container">
-                    <div class="logo-placeholder">G</div>
-                    <div class="brand">
-                        <span class="brand-name">Goods for Good</span>
-                        <span class="tagline">Connecting generosity with need</span>
-                    </div>
-                </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="donate.html" class="active">Donate</a></li>
-      <li><a href="profile.html">Profile</a></li>
-    </ul>
-  </nav>
+  <h2>Donate an Item</h2>
+  
+  <form id="donationForm" enctype="multipart/form-data">
+    <input type="text" name="itemName" placeholder="Item Name" required><br><br>
+    <input type="text" name="itemType" placeholder="Item Type" required><br><br>
+    <input type="number" name="quantity" placeholder="Quantity" min="1" required><br><br> <!-- ✅ Added field -->
+    <input type="text" name="pickupLocation" placeholder="Pickup Location" required><br><br>
+    <input type="file" name="photo" id="photo" required><br><br>
+    <button type="submit">Submit Donation</button>
+  </form>
 
-  <!-- Donation Form -->
-  <main class="container">
-    <h2>Donate an Item</h2>
+  <script>
+    const form = document.getElementById('donationForm');
 
-    <!-- ✅ Correctly defined form -->
-    <form
-  id="donationForm"
-  action="/api/donations"
-  method="POST"
-  enctype="multipart/form-data"
-  class="form-box"
->
-  <label for="itemPhoto">Upload Item Photo</label>
-  <input type="file" id="itemPhoto" name="photo" accept="image/*" required /><br />
-  <img id="preview" class="preview-img" style="display: none;" />
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  <label for="category">Select Category</label>
-  <select id="category" name="category" required>
-    <option value="">--Choose Category--</option>
-    <option value="clothes">Clothes</option>
-    <option value="books">Books</option>
-    <option value="utensils">Utensils</option>
-    <option value="electronics">Electronics</option>
-  </select>
+      const userId = localStorage.getItem('userId'); // assuming user is logged in and ID is stored
+      if (!userId) {
+        alert("User not logged in");
+        return;
+      }
 
-  <label for="description">Description (Optional)</label>
-  <textarea id="description" name="description" rows="3" placeholder="Describe the item..."></textarea>
+      const formData = new FormData(form);
+      formData.append('userId', userId); // ✅ Make sure userId is included
 
-  <label for="quantity">Quantity</label>
-  <input type="number" id="quantity" name="quantity" min="1" placeholder="e.g. 5" required />
+      try {
+        const res = await fetch('http://localhost:5001/api/donations', {
+          method: 'POST',
+          body: formData
+        });
 
-  <label for="address">📍 Pick-up Address</label>
-  <textarea id="address" name="dropLocation" rows="2" placeholder="Enter full drop-off address..." required></textarea>
+        const data = await res.json();
 
-  <button type="submit" class="submit-btn">Submit Donation</button>
-  <div class="message" id="msg"></div>
-</form>
-
-  </main>
-
-  <script src="js/donate.js"></script>
+        if (res.ok) {
+          alert("Donation submitted successfully!");
+          form.reset();
+        } else {
+          alert(data.message || "Error: " + data.error);
+        }
+      } catch (err) {
+        alert("Something went wrong: " + err.message);
+      }
+    });
+  </script>
 </body>
 </html>
