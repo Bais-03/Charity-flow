@@ -1,0 +1,44 @@
+<h2>All Donations</h2>
+<div id="donationList"></div>
+
+<script>
+  const token = localStorage.getItem('adminToken');
+
+  fetch('http://localhost:5001/api/donations', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('donationList');
+    data.forEach(d => {
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <h4>${d.itemName} (${d.itemType})</h4>
+        <p>Quantity: ${d.quantity}</p>
+        <p>Status: ${d.status}</p>
+        <p>User: ${d.userId.name} - ${d.userId.email}</p>
+        <button onclick="updateStatus('${d._id}', 'Accepted')">Accept</button>
+        <button onclick="updateStatus('${d._id}', 'Rejected')">Reject</button>
+        <hr/>
+      `;
+      container.appendChild(div);
+    });
+  });
+
+  async function updateStatus(id, status) {
+    const res = await fetch(`http://localhost:5001/api/donations/${id}/status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ status }),
+    });
+
+    const data = await res.json();
+    alert(data.message);
+    location.reload();
+  }
+</script>
