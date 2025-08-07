@@ -1,44 +1,67 @@
-<h2>All Donations</h2>
-<div id="donationList"></div>
-
-<script>
-  const token = localStorage.getItem('adminToken');
-
-  fetch('http://localhost:5001/api/donations', {
-    headers: {
-      Authorization: `Bearer ${token}`,
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard - CharityFlow</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
     }
-  })
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById('donationList');
-    data.forEach(d => {
-      const div = document.createElement('div');
-      div.innerHTML = `
-        <h4>${d.itemName} (${d.itemType})</h4>
-        <p>Quantity: ${d.quantity}</p>
-        <p>Status: ${d.status}</p>
-        <p>User: ${d.userId.name} - ${d.userId.email}</p>
-        <button onclick="updateStatus('${d._id}', 'Accepted')">Accept</button>
-        <button onclick="updateStatus('${d._id}', 'Rejected')">Reject</button>
-        <hr/>
-      `;
-      container.appendChild(div);
-    });
-  });
+    h1 {
+      color: #333;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    a {
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      padding: 10px 15px;
+      background: #007BFF;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Admin Dashboard</h1>
+  <div class="card-container">
+    
+    <div class="card">
+      <h3>Pending Donations</h3>
+      <p>Review, Accept or Reject donations submitted by users.</p>
+      <a href="pending-donations.html">Go to Pending</a>
+    </div>
 
-  async function updateStatus(id, status) {
-    const res = await fetch(`http://localhost:5001/api/donations/${id}/status`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ status }),
-    });
+    <div class="card">
+      <h3>Match Donations</h3>
+      <p>Match accepted donations to NGO needs.</p>
+      <a href="match-donations.html">Go to Match</a>
+    </div>
 
-    const data = await res.json();
-    alert(data.message);
-    location.reload();
-  }
-</script>
+    <div class="card">
+      <h3>Track Donations</h3>
+      <p>Track delivery and verification status of donations.</p>
+      <a href="track-donations.html">Go to Track</a>
+    </div>
+
+  </div>
+</body>
+</html>
