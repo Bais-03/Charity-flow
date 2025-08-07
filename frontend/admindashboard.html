@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Goods for Good</title>
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link to Google Fonts for Poppins and Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="admindashboard.css">
+</head>
+<body>
+    <!-- Navigation Panel -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-container">
+                    <div class="logo-placeholder">G</div>
+                    <div class="brand">
+                        <span class="brand-name">Goods for Good</span>
+                        <span class="tagline">Admin Dashboard</span>
+                    </div>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="admin.html">Admin</a>
+                    <a href="ngo.html">NGO</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="admin-indicator">
+                    <i class="fas fa-user-shield"></i> Admin
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="user-avatar admin-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">Admin User</div>
+                        <div class="user-email">admin@goodsforgood.org</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item active">
+                    <a href="#dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#pending"><i class="fas fa-hourglass-half"></i><span>Pending Donations</span></a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#matching"><i class="fas fa-handshake"></i><span>Matching</span></a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#tracking"><i class="fas fa-truck"></i><span>Tracking</span></a>
+                </li>
+               
+            </ul>
+            <div class="logout-btn-container">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="dashboard-main">
+            <!-- Dashboard Content -->
+            <div id="dashboard" class="dashboard-content">
+                <h2 class="dashboard-title">Admin Dashboard</h2>
+                <p class="dashboard-subtitle">System overview and quick actions</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-hourglass-half stat-card-icon"></i>
+                        <span class="stat-card-value" id="pending-count">0</span>
+                        <span class="stat-card-label">Pending Donations</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-handshake stat-card-icon"></i>
+                        <span class="stat-card-value" id="matched-count">0</span>
+                        <span class="stat-card-label">Matched Donations</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-truck stat-card-icon"></i>
+                        <span class="stat-card-value" id="delivered-count">0</span>
+                        <span class="stat-card-label">Delivered Today</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users stat-card-icon"></i>
+                        <span class="stat-card-value" id="active-users">0</span>
+                        <span class="stat-card-label">Active Users</span>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3 class="section-title">Recent Activity</h3>
+                    <div class="activity-list" id="activity-list">
+                        <!-- Activity items will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Donations Content -->
+            <div id="pending" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Pending Donations</h2>
+                    <p class="section-subtitle">Review and approve donations submitted by users</p>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table" id="pending-donations-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Donor</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Pending donations will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Matching Content -->
+            <div id="matching" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Match Donations</h2>
+                    <p class="section-subtitle">Match approved donations with NGO needs</p>
+                </div>
+                <div class="matching-container">
+                    <div class="matching-column">
+                        <h3>Available Donations</h3>
+                        <div class="matching-list" id="available-donations">
+                            <!-- Available donations will be loaded here -->
+                        </div>
+                    </div>
+                    <div class="matching-column">
+                        <h3>NGO Requests</h3>
+                        <div class="matching-list" id="ngo-requests">
+                            <!-- NGO requests will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tracking Content -->
+            <div id="tracking" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Track Donations</h2>
+                    <p class="section-subtitle">Monitor the status of matched donations</p>
+                </div>
+                <div class="tracking-filters">
+                    <div class="filter-group">
+                        <label for="status-filter">Status:</label>
+                        <select id="status-filter" class="form-control">
+                            <option value="all">All</option>
+                            <option value="scheduled">Scheduled for Pickup</option>
+                            <option value="in-transit">In Transit</option>
+                            <option value="delivered">Delivered</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="date-filter">Date Range:</label>
+                        <input type="date" id="date-from" class="form-control">
+                        <span>to</span>
+                        <input type="date" id="date-to" class="form-control">
+                    </div>
+                    <button class="filter-btn" id="apply-filters">
+                        <i class="fas fa-filter"></i> Apply Filters
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table" id="tracking-table">
+                        <thead>
+                            <tr>
+                                <th>Donation</th>
+                                <th>NGO</th>
+                                <th>Pickup Date</th>
+                                <th>Status</th>
+                                <th>Driver</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Tracking data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Other sections (Users, NGOs, Reports, Settings) would follow similar structure -->
+            
+        </div>
+    </div>
+
+    
+        <!-- Same footer as user dashboard -->
+             <footer class="site-footer">
+  <div class="footer-wave"></div>
+  
+  <div class="container">
+    <div class="footer-main">
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-circle">G</span>
+          <div>
+            <h3>Goods for Good</h3>
+            <p>Connecting generosity with need</p>
+          </div>
+        </div>
+        <p class="footer-mission">Bridging the gap between surplus resources and communities in need across India since 2015.</p>
+      </div>
+
+      <!-- Links Column -->
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Our Impact</a></li>
+          <li><a href="#">Donate Goods</a></li>
+          <li><a href="#">Partner NGOs</a></li>
+          <li><a href="#">Volunteer</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Column -->
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <address>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Charity Plaza, Mumbai 400001</p>
+          <p><i class="fas fa-phone"></i> +91 22 1234 5678</p>
+          <p><i class="fas fa-envelope"></i> contact@goodsforgood.org</p>
+        </address>
+      </div>
+
+      <!-- Social/Newsletter Column -->
+      <div class="footer-connect">
+        <h4>Stay Connected</h4>
+        <div class="social-media">
+          <a href="#" aria-label="Facebook" class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" aria-label="Twitter" class="social-icon twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" aria-label="Instagram" class="social-icon instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="social-icon linkedin">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+        
+        <div class="newsletter">
+          <p>Subscribe to our newsletter</p>
+          <form>
+            <input type="email" placeholder="Your email address">
+            <button type="submit">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copyright">
+        &copy; 2023 Goods for Good. All rights reserved.
+      </div>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+    
+    
+    <!-- Link to external JavaScript file -->
+    <script src="admindashboard.js"></script>
+</body>
+</html>
