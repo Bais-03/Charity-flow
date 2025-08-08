@@ -4,7 +4,8 @@ import {
   loginNGO,
   requestItem,
   getNGORequests,
-  confirmReceived
+  confirmReceived,
+  getAllNGONeeds
 } from '../controllers/ngoController.js'
 
 const router = express.Router()
@@ -23,5 +24,8 @@ router.get('/:id/requests', getNGORequests)
 
 // @route   PUT /api/ngos/:ngoId/confirm/:donationId
 router.put('/:ngoId/confirm/:donationId', confirmReceived)
+
+//@routes  GET /api/ngos/needs
+router.get('/needs', getAllNGONeeds);
 
 export default router
