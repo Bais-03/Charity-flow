@@ -12,11 +12,17 @@ const donationSchema = new mongoose.Schema({
   },
   itemType: {
     type: String,
-    enum: ["Clothes", "Plastic", "Wood", "Electronics", "Others"],
+    enum: ["Clothing", "Furniture", "Electronics", "Books", "Toys", "Household", "Other"],
     required: true,
   },
-  image: {
+  quantity: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+  photo: {
     type: String, // path or URL to the uploaded image
+    required: true,
   },
   status: {
     type: String,
