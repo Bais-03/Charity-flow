@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Goods for Good</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-container">
+                    <div class="logo-placeholder">G</div>
+                    <div class="brand">
+                        <span class="brand-name">Goods for Good</span>
+                        <span class="tagline">Connecting generosity with need</span>
+                    </div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="admin.html">Admin</a>
+                    <a href="ngo.html">NGO's</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                
+               <div class="auth-buttons">
+                    <button class="btn btn-login"><a href="./public/adminLogin.html">Log In</a></button>
+                    <!-- <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button> -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="admin-hero">
+            <div class="container">
+                <div class="admin-hero-content">
+                    <h1>Admin</h1>
+                    <p>Effortlessly manage donation requests, allocate resources, and oversee the entire network of donors and NGOs.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="admin-login-section">
+            <div class="container text-center">
+                <p class="login-prompt">Log in as an administrator to access the full dashboard.</p>
+                <a href="./public/adminLogin.html" class="btn btn-admin-login">Admin Login</a>
+            </div>
+        </section>
+        
+        <section class="admin-stats-overview">
+            <div class="container">
+                <div class="section-header">
+                    <h2>System Overview</h2>
+                    <p>A quick look at the vital statistics of the platform.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <h3>1,542</h3>
+                        <p>Total Donations</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>1,200</h3>
+                        <p>Active NGOs</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <h3>500+</h3>
+                        <p>Registered Donors</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-hourglass-start"></i>
+                        <h3>78</h3>
+                        <p>Pending Requests</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="management-modules">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Management Modules</h2>
+                    <p>Navigate through different sections to manage the platform's operations.</p>
+                </div>
+
+                <div class="modules-grid">
+                    <a href="#" class="module-card">
+                        <div class="module-icon"><i class="fas fa-list-check"></i></div>
+                        <h3>NGO Partner Requests</h3>
+                        <p>Review and approve new NGO partnership applications.</p>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="module-icon"><i class="fas fa-boxes"></i></div>
+                        <h3>Manage Donations</h3>
+                        <p>View, categorize, and track all incoming donations.</p>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="module-icon"><i class="fas fa-sitemap"></i></div>
+                        <h3>Allocate Donations</h3>
+                        <p>Match donor items with specific NGO needs. </p>
+                    </a>
+                    <a href="#" class="module-card">
+                        <div class="module-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Reports & Analytics</h3>
+                        <p>Access detailed reports on impact, trends, and activities.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="recent-activity">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                    <p>Stay up-to-date with the latest events on the platform.</p>
+                </div>
+                
+                <div class="activity-log">
+                    <div class="activity-item">
+                        <span class="activity-icon"><i class="fas fa-arrow-right"></i></span>
+                        <div class="activity-details">
+                            <p><strong><a href="#">Happy Hands Foundation</a></strong> submitted a new request for **winter clothing**.</p>
+                            <span class="activity-time">5 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-icon"><i class="fas fa-check"></i></span>
+                        <div class="activity-details">
+                            <p><strong><a href="#">Donation #8754</a></strong> (School Supplies) was successfully delivered to **Child's Hope NGO**.</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-icon"><i class="fas fa-user-plus"></i></span>
+                        <div class="activity-details">
+                            <p>New donor Arjun V. registered on the platform.</p>
+                            <span class="activity-time">Yesterday</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-icon"><i class="fas fa-handshake-angle"></i></span>
+                        <div class="activity-details">
+                            <p>New NGO partnership request from Sarva Shiksha Abhiyan is awaiting review.</p>
+                            <span class="activity-time">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-wave"></div>
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-circle">G</span>
+                        <div>
+                            <h3>Goods for Good</h3>
+                            <p>Connecting generosity with need</p>
+                        </div>
+                    </div>
+                    <p class="footer-mission">Bridging the gap between surplus resources and communities in need across India since 2015.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Our Impact</a></li>
+                        <li><a href="#">Donate Goods</a></li>
+                        <li><a href="#">Partner NGOs</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Charity Plaza, Mumbai 400001</p>
+                        <p><i class="fas fa-phone"></i> +91 22 1234 5678</p>
+                        <p><i class="fas fa-envelope"></i> contact@goodsforgood.org</p>
+                    </address>
+                </div>
+                <div class="footer-connect">
+                    <h4>Stay Connected</h4>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook" class="social-icon facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter" class="social-icon twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="social-icon linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                    <div class="newsletter">
+                        <p>Subscribe to our newsletter</p>
+                        <form>
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 Goods for Good. All rights reserved.
+                </div>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Donate an Item</title>
+</head>
+<body>
+  <h2>Donate an Item</h2>
+  
+  <form id="donationForm" enctype="multipart/form-data">
+    <input type="text" name="itemName" placeholder="Item Name" required><br><br>
+    <input type="text" name="itemType" placeholder="Item Type" required><br><br>
+    <input type="number" name="quantity" placeholder="Quantity" min="1" required><br><br> <!-- ✅ Added field -->
+    <input type="text" name="pickupLocation" placeholder="Pickup Location" required><br><br>
+    <input type="file" name="photo" id="photo" required><br><br>
+    <button type="submit">Submit Donation</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('donationForm');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const userId = localStorage.getItem('userId'); // assuming user is logged in and ID is stored
+      if (!userId) {
+        alert("User not logged in");
+        return;
+      }
+
+      const formData = new FormData(form);
+      formData.append('userId', userId); // ✅ Make sure userId is included
+
+      try {
+        const res = await fetch('http://localhost:5001/api/donations', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("Donation submitted successfully!");
+          form.reset();
+        } else {
+          alert(data.message || "Error: " + data.error);
+        }
+      } catch (err) {
+        alert("Something went wrong: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

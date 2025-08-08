@@ -1,0 +1,253 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Dashboard | Goods for Good</title>
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Link to Google Fonts for Poppins and Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Link to external stylesheet -->
+    <link rel="stylesheet" href="ngodashboard.css">
+</head>
+<body>
+    <!-- Navigation Panel -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-container">
+                    <div class="logo-placeholder">G</div>
+                    <div class="brand">
+                        <span class="brand-name">Goods for Good</span>
+                        <span class="tagline">Connecting generosity with need</span>
+                    </div>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="admin.html">Admin</a>
+                    <a href="ngo.html">NGO's</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <!-- <div class="auth-buttons">
+                    <button class="btn btn-login"><a href="login.html">Log In</a></button>
+                    <button class="btn btn-signup"><a href="signup.html">Sign Up</a></button>
+                </div> -->
+            </nav>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-handshake"></i> <!-- NGO icon -->
+                    </div>
+                    <div class="user-info">
+                        <div class="user-name">NGO Name</div>
+                        <div class="user-email">ngo.email@example.com</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item active">
+                    <a href="#dashboard-overview"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#request-item-section"><i class="fas fa-box-open"></i><span>Request Item</span></a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#my-requests-section"><i class="fas fa-list-alt"></i><span>My Requests</span></a>
+                </li>
+                <!-- <li class="sidebar-nav-item">
+                    <a href="#"><i class="fas fa-cog"></i><span>Settings</span></a>
+                </li> -->
+            </ul>
+            <div class="logout-btn-container">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="dashboard-main">
+            <!-- Dashboard Overview Content -->
+            <div id="dashboard-overview" class="dashboard-content">
+                <h2 class="dashboard-title">Welcome, NGO Name!</h2>
+                <p class="dashboard-subtitle">Here's a quick overview of your activity and needs.</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-hand-holding-box stat-card-icon"></i> <!-- Custom icon for requests -->
+                        <span class="stat-card-value">5</span>
+                        <span class="stat-card-label">Active Requests</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-check-circle stat-card-icon"></i>
+                        <span class="stat-card-value">18</span>
+                        <span class="stat-card-label">Fulfilled Requests</span>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users stat-card-icon"></i>
+                        <span class="stat-card-value">150+</span>
+                        <span class="stat-card-label">Beneficiaries Reached</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Request Item Form Content -->
+            <div id="request-item-section" class="request-container">
+                <div class="form-header">
+                    <h2 class="form-title">Request New Items</h2>
+                    <p class="form-subtitle">Submit a request for items your community needs.</p>
+                </div>
+
+                <form id="requestForm">
+                    <div class="form-group">
+                        <label for="itemType" class="form-label">Item Category</label>
+                        <select id="itemType" name="itemType" class="form-control" required>
+                            <option value="">Select Category</option>
+                            <option value="Clothes">Clothes</option>
+                            <option value="Plastic">Plastic</option>
+                            <option value="Wood">Wood</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="itemName" class="form-label">Specific Item</label>
+                        <select id="itemName" name="itemName" class="form-control" required>
+                            <option value="">Select Item</option>
+                        </select>
+                    </div>
+
+                    <div id="customItemNameContainer" class="form-group" style="display: none;">
+                        <label for="customItemName" class="form-label">Specify Custom Item Name</label>
+                        <input type="text" id="customItemName" class="form-control" placeholder="e.g. Winter Coats, School Books">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Enter quantity needed" min="1" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit Request
+                    </button>
+                </form>
+            </div>
+
+            <!-- My Requests Content (Full list, previously ngo-requests.html content) -->
+            <div id="my-requests-section" class="my-requests-full-section">
+                <div class="my-requests-header">
+                    <h2 class="my-requests-title">My Previous Requests</h2>
+                    <p class="my-requests-subtitle">A comprehensive list of all your submitted item requests.</p>
+                </div>
+                <div class="requests-grid" id="all-requests-list">
+                    <p class="message">Loading requests...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Section -->
+    <footer class="site-footer">
+        <div class="footer-wave"></div>
+        <div class="container">
+            <div class="footer-main">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-circle">G</span>
+                        <div>
+                            <h3>Goods for Good</h3>
+                            <p>Connecting generosity with need</p>
+                        </div>
+                    </div>
+                    <p class="footer-mission">Bridging the gap between surplus resources and communities in need across India since 2015.</p>
+                </div>
+
+                <!-- Links Column -->
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Our Impact</a></li>
+                        <li><a href="#">Donate Goods</a></li>
+                        <li><a href="#">Partner NGOs</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Charity Plaza, Mumbai 400001</p>
+                        <p><i class="fas fa-phone"></i> +91 22 1234 5678</p>
+                        <p><i class="fas fa-envelope"></i> contact@goodsforgood.org</p>
+                    </address>
+                </div>
+
+                <!-- Social/Newsletter Column -->
+                <div class="footer-connect">
+                    <h4>Stay Connected</h4>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook" class="social-icon facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter" class="social-icon twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="social-icon linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="newsletter">
+                        <p>Subscribe to our newsletter</p>
+                        <form>
+                            <input type="email" placeholder="Your email address">
+                            <button type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 Goods for Good. All rights reserved.
+                </div>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Custom Message Box HTML -->
+    <div id="custom-message-box" class="custom-message-box" style="display: none;">
+        <div class="custom-message-content">
+            <span class="close-button">&times;</span>
+            <p id="custom-message-text"></p>
+            <button class="custom-message-ok-btn">OK</button>
+        </div>
+    </div>
+    <!-- Link to common utility JavaScript functions -->
+    <script src="ngodashboard.js"></script>
+    <!-- Link to JavaScript for request form functionality -->
+    <script src="ngorequestform.js"></script>
+    <!-- Link to JavaScript for displaying requests -->
+    <script src="ngodisplayrequest.js"></script>
+</body>
+</html>

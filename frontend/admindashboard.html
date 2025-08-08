@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Goods for Good</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="admindashboard.css">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo-container">
+          <div class="logo-placeholder">G</div>
+          <div class="brand">
+            <span class="brand-name">Goods for Good</span>
+            <span class="tagline">Connecting generosity with need</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="admin.html">Admin</a>
+          <a href="ngo.html">NGO's</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="admin-indicator">
+          <i class="fas fa-user-shield"></i> Admin
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-header-text">Admin Panel</span>
+        <i class="fas fa-chevron-left"></i>
+      </div>
+      <div class="sidebar-content">
+        <div class="user-profile">
+          <div class="user-avatar"><i class="fas fa-user-shield"></i></div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-email">admin@goodsforgood.org</div>
+          </div>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-nav-item active">
+            <a href="#dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./public/pending-donations.html"><i class="fas fa-hourglass-half"></i><span>Pending Donations</span></a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./public/match-donations.html"><i class="fas fa-handshake"></i><span>Matching</span></a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="./public/track-donations.html"><i class="fas fa-truck"></i><span>Tracking</span></a>
+          </li>
+        </ul>
+
+        <div class="logout-btn-container">
+          <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <button class="sidebar-toggle-mobile" id="mobileSidebarToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <main class="dashboard-main">
+      <section id="dashboard" class="dashboard-content">
+        <h1 class="dashboard-title">Admin Dashboard</h1>
+        <p class="dashboard-subtitle">System overview and quick actions</p>
+
+        <div class="card-container">
+          <div class="card">
+            <h3>Pending Donations</h3>
+            <p>Review, Accept or Reject donations submitted by users.</p>
+            <a href="./public/pending-donations.html">Go to Pending</a>
+          </div>
+          <div class="card">
+            <h3>Match Donations</h3>
+            <p>Match accepted donations to NGO needs.</p>
+            <a href="./public/match-donations.html">Go to Match</a>
+          </div>
+          <div class="card">
+            <h3>Track Donations</h3>
+            <p>Track delivery and verification status of donations.</p>
+            <a href="./public/track-donations.html">Go to Track</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="pending" class="dashboard-content" style="display: none;">
+        <h1 class="dashboard-title">Pending Donations</h1>
+        <p class="dashboard-subtitle">Manage all pending donation requests.</p>
+        <p>This is where the list of pending donations would go.</p>
+      </section>
+
+      <section id="matching" class="dashboard-content" style="display: none;">
+        <h1 class="dashboard-title">Match Donations</h1>
+        <p class="dashboard-subtitle">Match donations to specific NGO needs.</p>
+        <p>This is where you would match donations with NGOs.</p>
+      </section>
+
+      <section id="tracking" class="dashboard-content" style="display: none;">
+        <h1 class="dashboard-title">Track Donations</h1>
+        <p class="dashboard-subtitle">View the status of ongoing donations.</p>
+        <p>This is where you would track the delivery of donations.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-wave"></div>
+    <div class="container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-circle">G</span>
+            <div>
+              <h3>Goods for Good</h3>
+              <p>Connecting generosity with need</p>
+            </div>
+          </div>
+          <p class="footer-mission">Bridging the gap between surplus resources and communities in need across India since 2015.</p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Our Impact</a></li>
+            <li><a href="#">Donate Goods</a></li>
+            <li><a href="#">Partner NGOs</a></li>
+            <li><a href="#">Volunteer</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <address>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Charity Plaza, Mumbai 400001</p>
+            <p><i class="fas fa-phone"></i> +91 22 1234 5678</p>
+            <p><i class="fas fa-envelope"></i> contact@goodsforgood.org</p>
+          </address>
+        </div>
+
+        <div class="footer-connect">
+          <h4>Stay Connected</h4>
+          <div class="social-media">
+            <a href="#" aria-label="Facebook" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <div class="newsletter">
+            <p>Subscribe to our newsletter</p>
+            <form>
+              <input type="email" placeholder="Your email address">
+              <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="copyright">
+          &copy; 2023 Goods for Good. All rights reserved.
+        </div>
+        <div class="legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Accessibility</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sidebar = document.querySelector('.sidebar');
+      const sidebarHeader = document.querySelector('.sidebar-header');
+      const mobileSidebarToggle = document.getElementById('mobileSidebarToggle');
+      const sidebarLinks = document.querySelectorAll('.sidebar-nav-item a');
+      const sections = document.querySelectorAll('.dashboard-main section');
+
+      // Toggle sidebar on header click (desktop)
+      sidebarHeader.addEventListener('click', () => {
+        if (window.innerWidth > 992) {
+          sidebar.classList.toggle('collapsed');
+        }
+      });
+
+      // Toggle sidebar on mobile button click
+      if (mobileSidebarToggle) {
+        mobileSidebarToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('show');
+        });
+      }
+
+      // Close sidebar when clicking outside on mobile
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 992 && 
+            !sidebar.contains(e.target) && 
+            e.target !== mobileSidebarToggle && 
+            !mobileSidebarToggle.contains(e.target)) {
+          sidebar.classList.remove('show');
+        }
+      });
+
+      // Show initial section
+      const initialActiveLink = document.querySelector('.sidebar-nav-item.active a');
+      if (initialActiveLink && initialActiveLink.getAttribute('href').startsWith('#')) {
+        const targetId = initialActiveLink.getAttribute('href');
+        document.querySelector(targetId).style.display = 'block';
+      }
+
+      // Sidebar navigation
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (href.startsWith('#')) {
+            e.preventDefault();
+
+            sidebarLinks.forEach(item => item.parentElement.classList.remove('active'));
+            link.parentElement.classList.add('active');
+
+            sections.forEach(section => section.style.display = 'none');
+            const targetSection = document.querySelector(href);
+            if (targetSection) {
+              targetSection.style.display = 'block';
+            }
+
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 992) {
+              sidebar.classList.remove('show');
+            }
+          }
+        });
+      });
+
+      // Card links
+      const cardLinks = document.querySelectorAll('.card a');
+      cardLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            const sidebarLink = document.querySelector(`.sidebar-nav-item a[href="${href}"]`);
+            if (sidebarLink) sidebarLink.click();
+          }
+        });
+      });
+    });
+
+    function logout() {
+      console.log('Logging out...');
+      window.location.href = './public/adminLogin.html';
+    }
+  </script>
+</body>
+</html>

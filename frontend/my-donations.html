@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Donations</title>
+</head>
+<body>
+  <h2>My Donations</h2>
+  <div id="donationList"></div>
+
+  <script>
+    async function loadDonations() {
+      const userId = localStorage.getItem('userId');
+      const res = await fetch(`http://localhost:5001/api/donations/user/${userId}`);
+      const donations = await res.json();
+      const list = document.getElementById('donationList');
+      if (res.ok) {
+        list.innerHTML = donations.map(d => `
+          <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+            <strong>Item:</strong> ${d.itemType} <br>
+            <strong>Quantity:</strong> ${d.quantity} <br>
+            <strong>Status:</strong> ${d.status}
+          </div>
+        `).join('');
+      } else {
+        list.innerText = "Failed to load donations.";
+      }
+    }
+
+    loadDonations();
+  </script>
+</body>
+</html>

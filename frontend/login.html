@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Goods for Good</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-hero">
+            <div class="hero-content">
+                <div class="logo">
+                    <div class="logo-circle">G</div>
+                    <div class="logo-text">Goods for Good</div>
+                </div>
+                <h2>Connecting Generosity with Need</h2>
+                <p>Join thousands of donors and NGOs creating positive change across India</p>
+            </div>
+        </div>
+        
+        <div class="login-form-container">
+            <div class="login-card">
+                <div class="welcome-message">
+                    <h3>Welcome!</h3>
+                    <p>Please login to continue your generosity journey</p>
+                </div>
+                
+                <div class="login-tabs">
+                    <div class="login-tab active" data-tab="user">User Login</div>
+                    <div class="login-tab" data-tab="ngo">NGO Login</div>
+                </div>
+                
+                <div id="userLoginForm">
+                    <form>
+                        <div class="form-group">
+                            <label for="userEmail">Email Address</label>
+                            <input type="email" id="userEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userPassword">Password</label>
+                            <input type="password" id="userPassword" placeholder="Enter your password" required>
+                            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                        </div>
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn-primary">Login</button>
+                        
+                        <div class="divider">or continue with</div>
+                        
+                        <div class="social-login">
+                            <div class="social-btn google">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <div class="social-btn facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </div>
+                            <div class="social-btn apple">
+                                <i class="fab fa-apple"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="login-footer">
+                        New to Goods for Good? <a href="signup.html">Create account</a>
+                    </div>
+                </div>
+                
+                <div id="ngoLoginForm" style="display: none;">
+                    <form>
+                        <div class="form-group">
+                            <label for="ngoEmail">Organization Email</label>
+                            <input type="email" id="ngoEmail" placeholder="Enter NGO email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ngoPassword">Password</label>
+                            <input type="password" id="ngoPassword" placeholder="Enter password" required>
+                            <i class="fas fa-eye password-toggle" id="toggleNgoPassword"></i>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label for="ngoId">NGO Registration ID</label>
+                            <input type="text" id="ngoId" placeholder="Enter NGO ID" required>
+                        </div> -->
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="rememberNgo">
+                                <label for="rememberNgo">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password" id="forgotNgoPasswordLink">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn-primary"> Login</button>
+                    </form>
+                    <div class="login-footer">
+                        Not registered? <a href="/ngo-register">Register your NGO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reset Password</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                <div class="form-group">
+                    <label for="resetEmail">Email Address</label>
+                    <input type="email" id="resetEmail" placeholder="Enter your email" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel">Cancel</button>
+                <button class="btn btn-submit">Send Reset Link</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

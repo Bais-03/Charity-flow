@@ -1,0 +1,271 @@
+/* ====================== */
+/* === Admin Page Styles === */
+/* ====================== */
+
+/* Keyframes for the admin hero gradient */
+@keyframes adminHeroGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Admin Hero Section */
+.admin-hero {
+    position: relative;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--light);
+    overflow: hidden;
+}
+
+.admin-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background-size: 200% 200%;
+    animation: adminHeroGradient 15s ease infinite;
+    z-index: 0;
+}
+
+.admin-hero-content {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.admin-hero-content h1 {
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    color: var(--light);
+    margin-bottom: 1rem;
+}
+
+.admin-hero-content p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* --------------------------------- */
+/* === Admin Login Section Styles === */
+/* --------------------------------- */
+.admin-login-section {
+    padding: 2rem 0;
+    background-color: #f7f7f7; /* A light, neutral background to separate it */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.login-prompt {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.btn-admin-login {
+    display: inline-block;
+    background-color: var(--secondary); /* A bright, distinct color */
+    color: var(--white);
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-admin-login:hover {
+    background-color: var(--secondary-dark); /* A darker shade on hover */
+}
+
+/* Ensure the .text-center utility exists in your CSS or add it */
+.text-center {
+    text-align: center;
+}
+
+/* ------------------------------------ */
+/* === Admin Stats Overview Section === */
+/* ------------------------------------ */
+.admin-stats-overview {
+    padding: 5rem 0;
+    background-color: var(--light);
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.stats-grid .stat-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stats-grid .stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stats-grid .stat-card i {
+    font-size: 2.5rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+
+.stats-grid .stat-card h3 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+/* ------------------------------------ */
+/* === Management Modules Section === */
+/* ------------------------------------ */
+.management-modules {
+    padding: 5rem 0;
+    background-color: var(--white);
+}
+
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.module-card {
+    background-color: var(--light);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.module-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.module-icon {
+    width: 70px;
+    height: 70px;
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.module-card:hover .module-icon {
+    background-color: var(--secondary);
+}
+
+.module-card h3 {
+    font-size: 1.25rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.module-card p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* ------------------------------------ */
+/* === Recent Activity Section === */
+/* ------------------------------------ */
+.recent-activity {
+    padding: 5rem 0;
+    background-color: var(--light);
+}
+
+.activity-log {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-right: 1.5rem;
+    flex-shrink: 0;
+}
+
+.activity-details p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.activity-details strong a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.activity-details strong a:hover {
+    text-decoration: underline;
+}
+
+.activity-time {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+}
+
+/* ----------------------------- */
+/* === Responsive adjustments === */
+/* ----------------------------- */
+@media (max-width: 768px) {
+    .admin-hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .modules-grid {
+        grid-template-columns: 1fr;
+    }
+}

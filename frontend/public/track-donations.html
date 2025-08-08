@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Donations</title>
+  <link rel="stylesheet" href="track-donations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="../admindashboard.html" class="back-link">Back to Dashboard</a>
+      <h2 class="page-title">Track Donations</h2>
+      <div></div> <!-- Empty div for spacing balance -->
+    </div>
+    
+    <div id="donationList">
+      <!-- Donations will be inserted here by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Modal for tracking info -->
+  <div id="trackingModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-header">
+        <i class="fas fa-truck"></i>
+        <h3>Donation Tracking</h3>
+      </div>
+      <div class="modal-body" id="trackingInfo">
+        <!-- Tracking info will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (async function () {
+      const token = localStorage.getItem("adminToken");
+      const container = document.getElementById("donationList");
+
+      try {
+        const res = await fetch("http://localhost:5001/api/donations", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch donations');
+        }
+
+        const donations = await res.json();
+        const trackable = donations.filter(d => d.status === "Matched");
+
+        if (trackable.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-box-open"></i>
+              <h3>No Donations to Track</h3>
+              <p>There are currently no matched donations available for tracking.</p>
+            </div>
+          `;
+          return;
+        }
+
+        trackable.forEach(d => {
+          const div = document.createElement("div");
+          div.className = "donation-card";
+          div.innerHTML = `
+            <span class="status-indicator">
+              <i class="fas fa-truck"></i>
+              Ready for Tracking
+            </span>
+            <h3 class="donation-header">${d.itemName} (${d.itemType})</h3>
+            <img src="http://localhost:5001/${d.photo}" class="donation-image" alt="${d.itemName}" />
+            <div class="donation-details">
+              <p><strong>Quantity:</strong> ${d.quantity}</p>
+              <p><strong>Status:</strong> ${d.status}</p>
+              ${d.ngoId?.name ? `<p><strong>Matched with:</strong> ${d.ngoId.name}</p>` : ''}
+            </div>
+            <button class="track-button" onclick="trackDonation('${d._id}')">
+              <i class="fas fa-map-marked-alt"></i> Track Donation
+            </button>
+          `;
+          container.appendChild(div);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        container.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-triangle" style="color: var(--secondary);"></i>
+            <h3>Error Loading Donations</h3>
+            <p>${error.message}</p>
+            <button class="track-button" onclick="location.reload()" style="max-width: 200px; margin: 1rem auto;">
+              <i class="fas fa-sync-alt"></i> Try Again
+            </button>
+          </div>
+        `;
+      }
+    })();
+
+    async function trackDonation(id) {
+      const token = localStorage.getItem("adminToken");
+      const modal = document.getElementById("trackingModal");
+      const trackingInfo = document.getElementById("trackingInfo");
+
+      try {
+        const res = await fetch(`http://localhost:5001/api/donations/${id}/track`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) {
+          throw new Error(await res.text());
+        }
+
+        const data = await res.json();
+        
+        // Display tracking info in modal
+        trackingInfo.innerHTML = `
+          <p><strong>Item:</strong> ${data.itemName} (${data.itemType})</p>
+          <p><strong>Status:</strong> ${data.status}</p>
+          <p><strong>Donor:</strong> ${data.userId?.name || 'N/A'}</p>
+          <p><strong>Contact:</strong> ${data.userId?.email || 'N/A'}</p>
+          <p><strong>Pickup Location:</strong> ${data.pickupLocation || 'N/A'}</p>
+          <p><strong>NGO:</strong> ${data.ngoId?.name || 'N/A'}</p>
+          ${data.deliveryDetails ? `<p><strong>Delivery Details:</strong> ${data.deliveryDetails}</p>` : ''}
+        `;
+        
+        modal.style.display = 'flex';
+      } catch (error) {
+        console.error('Error:', error);
+        trackingInfo.innerHTML = `
+          <p style="color: var(--secondary);">
+            <i class="fas fa-exclamation-circle"></i> Error loading tracking information: ${error.message}
+          </p>
+        `;
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById("trackingModal").style.display = 'none';
+    }
+
+    // Close modal when clicking outside content
+    window.onclick = function(event) {
+      const modal = document.getElementById("trackingModal");
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>

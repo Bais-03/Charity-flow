@@ -1,0 +1,221 @@
+/* ====================== */
+/* === ROOT VARIABLES === */
+/* ====================== */
+:root {
+    --primary: #2a9d8f;
+    --primary-dark: #1d7874;
+    --secondary: #e76f51;
+    --accent: #f4a261;
+    --light: #f8f9fa;
+    --dark: #264653;
+    --text: #333;
+    --text-light: #6c757d;
+}
+
+/* ====================== */
+/* === BASE STYLES ====== */
+/* ====================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    background-color: #f5f5f5;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ====================== */
+/* === SHARE YOUR STORY === */
+/* ====================== */
+.story-form-section {
+    padding: 80px 0;
+    background-color: var(--light);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: var(--dark);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--secondary));
+    border-radius: 2px;
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.story-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.5s ease;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, #d45a3d, #e76f51);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 111, 81, 0.3);
+}
+
+/* Response Message Styles */
+.response-message {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.response-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.response-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
+}
+
+.response-header p {
+    font-size: 16px;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.response-details {
+    background: #e9f7f0;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border-left: 5px solid var(--primary);
+}
+
+.response-details h4 {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.response-details ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.response-details li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: var(--dark);
+}
+
+.response-details li i {
+    color: var(--accent);
+    font-size: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.final-message {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--text);
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match Donations</title>
+  <link rel="stylesheet" href="match-donations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="../admindashboard.html" class="back-link">Back to Dashboard</a>
+      <h2 class="page-title">Match Donations</h2>
+      <div></div> <!-- Empty div for spacing balance -->
+    </div>
+    
+    <div id="donationList">
+      <!-- Donations will be inserted here by JavaScript -->
+    </div>
+  </div>
+
+  <script>
+    (async function () {
+      const token = localStorage.getItem("adminToken");
+
+      try {
+        const [donationsRes, needsRes] = await Promise.all([
+          fetch("http://localhost:5001/api/donations", {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          fetch("http://localhost:5001/api/ngos/needs", {
+            headers: { Authorization: `Bearer ${token}` }
+          })
+        ]);
+
+        if (!donationsRes.ok || !needsRes.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const donations = await donationsRes.json();
+        const ngoNeeds = await needsRes.json();
+
+        const acceptedDonations = donations.filter(d => d.status === "Accepted");
+        const container = document.getElementById("donationList");
+
+        if (acceptedDonations.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-box-open" style="color: var(--accent);"></i>
+              <h3>No Donations Available for Matching</h3>
+              <p>There are currently no accepted donations that need matching.</p>
+            </div>
+          `;
+          return;
+        }
+
+        acceptedDonations.forEach(d => {
+          const needsOptions = ngoNeeds.map(n => `
+            <option value="${n.ngoId}|${n.requestIndex}">
+              ${n.ngoName} needs ${n.quantity}x ${n.itemName} (${n.itemType})
+            </option>
+          `).join('');
+
+          const div = document.createElement("div");
+          div.className = "donation-card";
+          div.innerHTML = `
+            <span class="status-badge">Available</span>
+            <h3 class="donation-header">${d.itemName} (${d.itemType})</h3>
+            <img src="http://localhost:5001/${d.photo}" class="donation-image" />
+            <div class="donation-details">
+              <p><strong>Quantity:</strong> ${d.quantity}</p>
+              <p><strong>Donated by:</strong> ${d.userId?.name || 'Anonymous'}</p>
+              <p><strong>Contact:</strong> ${d.userId?.email || 'Not provided'}</p>
+            </div>
+            <select class="donation-select" id="need-${d._id}">
+              <option value="">-- Select NGO Need --</option>
+              ${needsOptions}
+            </select>
+            <button class="match-button" onclick="matchDonation('${d._id}')">
+              <i class="fas fa-handshake" style="margin-right: 8px;"></i> Match Donation
+            </button>
+          `;
+          container.appendChild(div);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById("donationList").innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-triangle" style="color: var(--secondary);"></i>
+            <h3>Error Loading Data</h3>
+            <p>${error.message}</p>
+            <button class="match-button" onclick="location.reload()" style="max-width: 200px; margin: 1rem auto;">
+              <i class="fas fa-sync-alt" style="margin-right: 8px;"></i> Try Again
+            </button>
+          </div>
+        `;
+      }
+    })();
+
+    async function matchDonation(donationId) {
+      const token = localStorage.getItem("adminToken");
+      const select = document.getElementById(`need-${donationId}`);
+      const value = select.value;
+
+      if (!value) {
+        alert("Please select an NGO need to match this donation with.");
+        return;
+      }
+
+      const [ngoId, requestIndex] = value.split("|");
+
+      try {
+        const res = await fetch(`http://localhost:5001/api/donations/${donationId}/match-ngo`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ ngoId, requestIndex })
+        });
+
+        if (!res.ok) {
+          throw new Error(await res.text());
+        }
+
+        const data = await res.json();
+        
+        // Show success message with icon
+        const card = select.closest('.donation-card');
+        card.innerHTML = `
+          <div class="success-state">
+            <i class="fas fa-check-circle"></i>
+            <h3>Successfully Matched!</h3>
+            <p>${data.message}</p>
+            <button class="match-button" onclick="location.reload()" style="max-width: 200px; margin: 1rem auto;">
+              <i class="fas fa-redo" style="margin-right: 8px;"></i> Continue
+            </button>
+          </div>
+        `;
+      } catch (error) {
+        console.error('Error:', error);
+        alert(`Failed to match donation: ${error.message}`);
+      }
+    }
+  </script>
+</body>
+</html>
