@@ -684,3 +684,154 @@ address {
         transform: none;
     }
 }
+
+/* Add these to your existing CSS */
+
+/* Mobile Navigation */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    background: var(--primary-dark);
+    z-index: 999;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.mobile-nav.active {
+    display: block;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.mobile-nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.mobile-nav-links a:hover,
+.mobile-nav-links a.active {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.mobile-auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Responsive Contact Cards */
+@media (max-width: 768px) {
+    .contact-info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .info-card {
+        padding: 25px 20px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .info-card .icon-large {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        align-self: flex-start;
+    }
+}
+
+/* Form Responsiveness */
+@media (max-width: 600px) {
+    .contact-form-section {
+        padding: 30px 20px;
+    }
+    
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group textarea {
+        padding: 12px 15px;
+    }
+    
+    .submit-btn {
+        padding: 14px;
+    }
+}
+
+/* Header Responsiveness */
+@media (max-width: 992px) {
+    .nav-links,
+    .auth-buttons {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .logo-container {
+        flex-grow: 1;
+    }
+    
+    .brand-name {
+        font-size: 20px;
+    }
+    
+    .tagline {
+        font-size: 10px;
+    }
+}
+
+/* Hero Section Responsiveness */
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: 40px 20px;
+    }
+    
+    .contact-hero h2 {
+        font-size: 2.2rem;
+    }
+    
+    .contact-hero p {
+        font-size: 1rem;
+    }
+}
+
+/* Footer Responsiveness */
+@media (max-width: 600px) {
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .legal-links {
+        justify-content: center;
+    }
+}
