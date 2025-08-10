@@ -9,32 +9,52 @@
     <link rel="stylesheet" href="contact.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo-container">
-                    <a href="index.html" class="logo-link">
-                        <div class="logo-placeholder">G</div>
-                    </a>
-                    <div class="brand">
-                        <h1 class="brand-name">Goods for Good</h1>
-                        <p class="tagline">Connecting generosity with need</p>
-                    </div>
+   <header>
+    <div class="container">
+        <nav>
+            <div class="logo-container">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-placeholder">G</div>
+                </a>
+                <div class="brand">
+                    <h1 class="brand-name">Goods for Good</h1>
+                    <p class="tagline">Connecting generosity with need</p>
                 </div>
-                <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="admin.html">Admin</a>
-                    <a href="ngo.html">NGO's</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-                <div class="auth-buttons">
-                    <button class="btn btn-login"><a href="login.html">Login</a></button>
-                    <button class="btn btn-signup"><a href="signup.html">Signup</a></button>
-                </div>
-            </nav>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="donate.html">Donate</a>
+                <a href="ngo.html">NGO's</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-login"><a href="login.html">Login</a></button>
+                <button class="btn btn-signup"><a href="signup.html">Signup</a></button>
+            </div>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        
+        <div class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="donate.html">Donate</a>
+                <a href="ngo.html">NGO's</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+            <div class="mobile-auth-buttons">
+                <button class="btn btn-login"><a href="login.html">Login</a></button>
+                <button class="btn btn-signup"><a href="signup.html">Signup</a></button>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <main class="contact-main">
         <div class="container">
@@ -91,17 +111,32 @@
         </div>
     </main>
 
-    <footer class="site-footer">
+     <footer class="site-footer">
         <div class="footer-wave"></div>
         <div class="container">
             <div class="footer-main">
                 <div class="footer-brand">
                     <div class="footer-logo">
                         <span class="logo-circle">G</span>
-                        <h3>Goods for Good</h3>
+                        <div>
+                            <h3>Goods for Good</h3>
+                            <p>Connecting generosity with need</p>
+                        </div>
                     </div>
                     <p class="footer-mission">Bridging the gap between surplus resources and communities in need across India since 2015.</p>
                 </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Our Impact</a></li>
+                        <li><a href="#">Donate Goods</a></li>
+                        <li><a href="#">Partner NGOs</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                    </ul>
+                </div>
+
                 <div class="footer-contact">
                     <h4>Contact Us</h4>
                     <address>
@@ -110,25 +145,39 @@
                         <p><i class="fas fa-envelope"></i> contact@goodsforgood.org</p>
                     </address>
                 </div>
+
                 <div class="footer-connect">
                     <h4>Stay Connected</h4>
                     <div class="social-media">
-                        <a href="#" aria-label="Facebook" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Facebook" class="social-icon facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" aria-label="Twitter" class="social-icon twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-icon instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn" class="social-icon linkedin">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
                     </div>
+                    
                     <div class="newsletter">
                         <p>Subscribe to our newsletter</p>
                         <form>
                             <input type="email" placeholder="Your email address">
-                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                            <button type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div class="copyright">&copy; 2023 Goods for Good. All rights reserved.</div>
+                <div class="copyright">
+                    &copy; 2023 Goods for Good. All rights reserved.
+                </div>
                 <div class="legal-links">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
@@ -174,6 +223,30 @@
                 formMessage.classList.add('error');
             }
         });
+        // Mobile menu toggle functionality
+document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+    const mobileNav = document.getElementById('mobileNav');
+    mobileNav.classList.toggle('active');
+    
+    // Toggle icon between bars and times
+    const icon = this.querySelector('i');
+    if (mobileNav.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+    } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+    }
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('mobileNav').classList.remove('active');
+        document.querySelector('.mobile-menu-toggle i').classList.remove('fa-times');
+        document.querySelector('.mobile-menu-toggle i').classList.add('fa-bars');
+    });
+});
     </script>
 </body>
 </html>
