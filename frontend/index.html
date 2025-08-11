@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <header>
+ <header>
         <div class="container">
             <nav>
                 <div class="logo-container">
@@ -20,6 +20,11 @@
                     </div>
                 </div>
                 
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
                 <div class="nav-links">
                     <a href="index.html">Home</a>
                     <a href="about.html">About</a>
@@ -28,11 +33,26 @@
                     <a href="contact.html">Contact</a>
                 </div>
                 
-               <div class="auth-buttons">
-    <button class="btn btn-login"><a href="login.html">Log In</a></button>
-    <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button>
-</div>
+                <div class="auth-buttons">
+                    <button class="btn btn-login"><a href="login.html">Log In</a></button>
+                    <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button>
+                </div>
             </nav>
+            
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobileNav">
+                <div class="mobile-nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="admin.html">Admin</a>
+                    <a href="ngo.html">NGO's</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="mobile-auth-buttons">
+                    <button class="btn btn-login"><a href="login.html">Log In</a></button>
+                    <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button>
+                </div>
+            </div>
         </div>
     </header>
 
