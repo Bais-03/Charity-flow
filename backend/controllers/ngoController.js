@@ -54,24 +54,25 @@ export const loginNGO = async (req, res) => {
 
 // NGO requests item
 export const requestItem = async (req, res) => {
-  const { ngoId, itemType, quantity } = req.body
+  const { ngoId, itemType, itemName, quantity } = req.body;
 
   try {
-    const ngo = await NGO.findById(ngoId)
-    if (!ngo) return res.status(404).json({ message: "NGO not found" })
+    const ngo = await NGO.findById(ngoId);
+    if (!ngo) return res.status(404).json({ message: "NGO not found" });
 
     ngo.requestHistory.push({
       itemType,
+      itemName,
       quantity,
       status: "Requested"
-    })
+    });
 
-    await ngo.save()
-    res.status(201).json({ message: "Request submitted" })
+    await ngo.save();
+    res.status(201).json({ message: "Request submitted" });
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message });
   }
-}
+};
 
 // NGO sees all its requests
 export const getNGORequests = async (req, res) => {
@@ -109,3 +110,47 @@ export const confirmReceived = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+
+
+// Get all open NGO needs (for admin)
+export const getAllNGONeeds = async (req, res) => {
+  try {
+    const ngos = await NGO.find();
+    const needs = [];
+    ngos.forEach(ngo => {
+      (ngo.requestHistory || []).forEach((req, idx) => {
+        if (req.status === "Requested") {
+          needs.push({
+            ngoId: ngo._id,
+            ngoName: ngo.name,
+            requestIndex: idx,
+            itemName: req.itemName,
+            itemType: req.itemType,
+            quantity: req.quantity,
+            status: req.status
+          });
+        }
+      });
+    });
+    res.json(needs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+// Get all donations made to a specific NGO
+export const getPreviousDonations = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const donations = await Donation.find({ ngoId: id })
+      .sort({ createdAt: -1 }); // Most recent first
+
+    res.json(donations);
+  } catch (error) {
+    console.error("Error fetching previous donations:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
