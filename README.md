@@ -46,6 +46,6 @@ GoodsForGood is a full-stack web application designed to manage non-monetary don
 ### **Team**
 
   * Nudaa Deshmukh
-  * Renukaa Bais
+  * Renuka Bais
   * Nidhi Chaphale
   * Aanchal Rathi
