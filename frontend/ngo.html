@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="ngo.css">
 </head>
 <body>
-    <header>
+     <header>
         <div class="container">
             <nav>
                 <div class="logo-container">
@@ -21,6 +21,11 @@
                     </div>
                 </div>
                 
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
                 <div class="nav-links">
                     <a href="index.html">Home</a>
                     <a href="about.html">About</a>
@@ -29,11 +34,26 @@
                     <a href="contact.html">Contact</a>
                 </div>
                 
-               <div class="auth-buttons">
+                <div class="auth-buttons">
                     <button class="btn btn-login"><a href="login.html">Log In</a></button>
                     <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button>
                 </div>
             </nav>
+            
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobileNav">
+                <div class="mobile-nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="admin.html">Admin</a>
+                    <a href="ngo.html">NGO's</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="mobile-auth-buttons">
+                    <button class="btn btn-login"><a href="login.html">Log In</a></button>
+                    <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -52,13 +72,13 @@
             <div class="container">
                 <div class="section-header">
                     <h2>Our Partner Network</h2>
-                    <p>We're proud to support over **1,200+ NGOs** across India.</p>
+                    <p>We're proud to support over 1,200+ NGOs across India.</p>
                 </div>
                 
                 <div class="network-stats">
                     <div class="stat-card">
                         <i class="fas fa-handshake"></i>
-                        <h3>1200+</h3>
+                        <h3> 1200+ </h3>
                         <p>Active NGO Partners</p>
                     </div>
                     <div class="stat-card">
@@ -291,5 +311,6 @@
         // Initial state
         updateProgress();
     </script>
+    <script src="index.js"></script>
 </body>
 </html>
