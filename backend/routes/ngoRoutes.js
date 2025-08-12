@@ -5,7 +5,8 @@ import {
   requestItem,
   getNGORequests,
   confirmReceived,
-  getAllNGONeeds
+  getAllNGONeeds,
+  allocateDonation
 } from '../controllers/ngoController.js'
 
 const router = express.Router()
@@ -27,5 +28,9 @@ router.put('/:ngoId/confirm/:donationId', confirmReceived)
 
 //@routes  GET /api/ngos/needs
 router.get('/needs', getAllNGONeeds);
+
+// @route   POST /api/ngos/allocate
+// @desc    Admin allocates a specific donation to an NGO
+router.post('/allocate', allocateDonation);
 
 export default router

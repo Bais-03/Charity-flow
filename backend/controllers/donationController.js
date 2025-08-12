@@ -77,3 +77,8 @@ export const trackDonationById = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+
+export const matchDonationToNGORequest = (req, res) => {
+    //logic for matching donations to requests 
+    res.send("This is the donation controller function.");
+};
