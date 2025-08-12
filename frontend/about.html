@@ -21,6 +21,11 @@
                     </div>
                 </div>
                 
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
                 <div class="nav-links">
                     <a href="index.html">Home</a>
                     <a href="about.html">About</a>
@@ -34,8 +39,25 @@
                     <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button>
                 </div>
             </nav>
+            
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobileNav">
+                <div class="mobile-nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="admin.html">Admin</a>
+                    <a href="ngo.html">NGO's</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="mobile-auth-buttons">
+                    <button class="btn btn-login"><a href="login.html">Log In</a></button>
+                    <button class="btn btn-signup"><a href="sign.html">Sign Up</a></button>
+                </div>
+            </div>
         </div>
     </header>
+
+   
 
     <main>
         <section class="about-hero">
@@ -163,7 +185,8 @@
                     <p class="section-subtitle">Join us in our mission to connect generosity with need.</p>
                 </div>
                 <div class="cta-buttons">
-                    <button class="btn btn-donate">Donate Now</button>
+                    
+                    <button class="btn-donate" onclick="window.location.href='login.html'">Donate Now</button>
                     <button class="btn btn-secondary">Learn More</button>
                 </div>
             </div>
