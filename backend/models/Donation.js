@@ -26,13 +26,24 @@ const donationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Pending", "Approved", "Rejected", "Allocated", "Submitted", "Delivered"],
+    enum: ["Pending", "Accepted", "Rejected", "Matched", "Fulfilled"],
     default: "Pending",
   },
   pickupLocation: {
     type: String,
     required: true,
   },
+  matchedNGO: {
+    ngoId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "NGO",
+    },
+    ngoName: String,
+    requestIndex: Number,
+    itemName: String,
+    itemType: String,
+    requestedQuantity: Number
+  }
 }, { timestamps: true });
 
 export default mongoose.model("Donation", donationSchema);

@@ -7,6 +7,7 @@ const ngoSchema = new mongoose.Schema({
   requestHistory: [
     {
       itemType: String,
+      itemName: String,
       quantity: Number,
       status: {
         type: String,

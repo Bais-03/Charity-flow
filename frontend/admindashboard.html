@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-  <link rel="stylesheet" href="admindashboard.css">
+  <link rel="stylesheet" href="admindashboard.css" />
 </head>
 
 <body>
@@ -65,6 +65,10 @@
           <li class="sidebar-nav-item">
             <a href="./public/track-donations.html"><i class="fas fa-truck"></i><span>Tracking</span></a>
           </li>
+          <!-- Updated: Register NGO nav item links to separate page -->
+          <li class="sidebar-nav-item">
+            <a href="./admin-register-ngo.html"><i class="fas fa-user-plus"></i><span>Register NGO</span></a>
+          </li>
         </ul>
 
         <div class="logout-btn-container">
@@ -100,6 +104,13 @@
             <p>Track delivery and verification status of donations.</p>
             <a href="./public/track-donations.html">Go to Track</a>
           </div>
+
+          <!-- NEW Register NGO Card linking to new page -->
+          <div class="card">
+            <h3>Register NGO</h3>
+            <p>Create new NGO accounts from the admin panel.</p>
+            <a href="./admin-register-ngo.html">Go to Register</a>
+          </div>
         </div>
       </section>
 
@@ -120,6 +131,8 @@
         <p class="dashboard-subtitle">View the status of ongoing donations.</p>
         <p>This is where you would track the delivery of donations.</p>
       </section>
+
+      <!-- Removed Register NGO section from this page -->
     </main>
   </div>
 
@@ -169,7 +182,7 @@
           <div class="newsletter">
             <p>Subscribe to our newsletter</p>
             <form>
-              <input type="email" placeholder="Your email address">
+              <input type="email" placeholder="Your email address" />
               <button type="submit"><i class="fas fa-paper-plane"></i></button>
             </form>
           </div>
@@ -213,10 +226,12 @@
 
       // Close sidebar when clicking outside on mobile
       document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 992 && 
-            !sidebar.contains(e.target) && 
-            e.target !== mobileSidebarToggle && 
-            !mobileSidebarToggle.contains(e.target)) {
+        if (
+          window.innerWidth <= 992 &&
+          !sidebar.contains(e.target) &&
+          e.target !== mobileSidebarToggle &&
+          !mobileSidebarToggle.contains(e.target)
+        ) {
           sidebar.classList.remove('show');
         }
       });
@@ -229,16 +244,16 @@
       }
 
       // Sidebar navigation
-      sidebarLinks.forEach(link => {
+      sidebarLinks.forEach((link) => {
         link.addEventListener('click', (e) => {
           const href = link.getAttribute('href');
           if (href.startsWith('#')) {
             e.preventDefault();
 
-            sidebarLinks.forEach(item => item.parentElement.classList.remove('active'));
+            sidebarLinks.forEach((item) => item.parentElement.classList.remove('active'));
             link.parentElement.classList.add('active');
 
-            sections.forEach(section => section.style.display = 'none');
+            sections.forEach((section) => (section.style.display = 'none'));
             const targetSection = document.querySelector(href);
             if (targetSection) {
               targetSection.style.display = 'block';
@@ -254,7 +269,7 @@
 
       // Card links
       const cardLinks = document.querySelectorAll('.card a');
-      cardLinks.forEach(link => {
+      cardLinks.forEach((link) => {
         link.addEventListener('click', (e) => {
           const href = link.getAttribute('href');
           if (href.startsWith('#')) {
@@ -270,6 +285,8 @@
       console.log('Logging out...');
       window.location.href = './public/adminLogin.html';
     }
+
+    // Removed registerNgoForm JS since Register NGO form is now on separate page
   </script>
 </body>
 </html>
