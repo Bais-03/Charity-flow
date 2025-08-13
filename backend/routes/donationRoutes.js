@@ -1,6 +1,6 @@
 import express from 'express';
-import multer from 'multer';
 import upload from '../middleware/uploadMiddleware.js';
+import { spamFilter } from '../middleware/spamFilter.js'; // Import spam filter
 import {
   createDonation,
   getAllDonations,
@@ -11,11 +11,12 @@ import {
 } from '../controllers/donationController.js';
 import { protectAdmin } from '../middleware/adminMiddleware.js';
 
-const router = express.Router(); // ✅ Move this to top BEFORE router.get()
+const router = express.Router();
 
 // @route   POST /api/donations
-// @desc    Submit donation with image
-router.post('/', upload.single('photo'), createDonation);
+// @desc    Submit donation with image (spam filter + file upload)
+// Middleware order: spamFilter -> upload -> controller
+router.post('/', spamFilter, upload.single('photo'), createDonation);
 
 // @route   GET /api/donations
 // @desc    Admin: get all donations
@@ -30,10 +31,11 @@ router.get('/user/:userId', getUserDonations);
 router.put('/:id/status', protectAdmin, updateDonationStatus);
 
 // @route   GET /api/donations/:id/track
-// @desc    Admin/NGO: Track if item is submitted
+// @desc    Admin/NGO: Track donation status
 router.get('/:id/track', protectAdmin, trackDonationById);
 
-
+// @route   PUT /api/donations/:id/match-ngo
+// @desc    Admin: Match donation to NGO request
 router.put('/:id/match-ngo', protectAdmin, matchDonationToNGORequest);
 
 export default router;
