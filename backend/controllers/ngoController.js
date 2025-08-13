@@ -1,9 +1,10 @@
 import NGO from "../models/NGO.js";
 import Donation from "../models/Donation.js";
 import bcrypt from "bcryptjs";
-import sendEmail from "../utils/emailSender.js";
+import sendEmail from "../utils/emailSender.js";  // assuming this is your NodeMailer helper
 import User from "../models/User.js";
 
+// Helper to get impact message based on itemType
 const getImpactMessage = (itemType) => {
   switch (itemType) {
     case 'Clothing':
@@ -21,8 +22,9 @@ const getImpactMessage = (itemType) => {
   }
 };
 
-const registerNGO = async (req, res) => {
+export const registerNGO = async (req, res) => {
   const { name, email, password, address, phone } = req.body;
+
   if (!name || !email || !password) {
     return res.status(400).json({ message: "Name, email, and password are required" });
   }
@@ -51,8 +53,7 @@ const registerNGO = async (req, res) => {
   }
 };
 
-// Login NGO only (no self-registration)
-const loginNGO = async (req, res) => {
+export const loginNGO = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -68,9 +69,8 @@ const loginNGO = async (req, res) => {
   }
 };
 
-// NGO requests item
-const requestItem = async (req, res) => {
-  const { ngoId, itemType, quantity } = req.body;
+export const requestItem = async (req, res) => {
+  const { ngoId, itemType, itemName, quantity } = req.body;
 
   try {
     const ngo = await NGO.findById(ngoId);
@@ -78,6 +78,7 @@ const requestItem = async (req, res) => {
 
     ngo.requestHistory.push({
       itemType,
+      itemName,
       quantity,
       status: "Requested"
     });
@@ -89,8 +90,7 @@ const requestItem = async (req, res) => {
   }
 };
 
-// NGO sees all its requests
-const getNGORequests = async (req, res) => {
+export const getNGORequests = async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -103,8 +103,7 @@ const getNGORequests = async (req, res) => {
   }
 };
 
-// NGO confirms item received
-const confirmReceived = async (req, res) => {
+export const confirmReceived = async (req, res) => {
   const { ngoId, donationId } = req.params;
 
   try {
@@ -126,11 +125,12 @@ const confirmReceived = async (req, res) => {
   }
 };
 
-const allocateDonation = async (req, res) => {
+// Merged allocateDonation function with NodeMailer email sending logic
+export const allocateDonation = async (req, res) => {
   const { ngoId, donationId, donorEmail } = req.body;
 
   try {
-    // 1. Find the donation and the NGO
+    // Find donation, NGO, donor
     const donation = await Donation.findById(donationId);
     const ngo = await NGO.findById(ngoId);
     const donor = await User.findOne({ email: donorEmail });
@@ -139,23 +139,29 @@ const allocateDonation = async (req, res) => {
       return res.status(404).json({ message: "Donation, NGO, or Donor not found" });
     }
 
-    // 2. Perform the allocation logic (e.g., update donation status, link to NGO)
+    // Update donation status and link to NGO
     donation.status = "Allocated";
     donation.allocatedToNgo = ngo._id;
     await donation.save();
 
-    // 3. Send email to the Donor (with dynamic name and impact message)
+    // Send email to Donor
     await sendEmail(
       donorEmail,
       `Your Donation Has Reached ${ngo.name}`,
-      `Dear ${donor.name},\n${donation.itemType} has been successfully allocated to ${ngo.name} and will support ${getImpactMessage(donation.itemType)}.\nWe’re grateful for your trust in GoodsForGood.\n\n- The GoodsForGood Team`
+      `Dear ${donor.name},\n\n` +
+      `${donation.itemType} has been successfully allocated to ${ngo.name} and will support ${getImpactMessage(donation.itemType)}.\n` +
+      `We’re grateful for your trust in GoodsForGood.\n\n` +
+      `- The GoodsForGood Team`
     );
 
-    // 4. Send email to the NGO (using the email from the database object)
+    // Send email to NGO
     await sendEmail(
       ngo.email,
       "New Donation Allocated to Your NGO",
-      `Hello ${ngo.name}, \nWe are excited to inform you that a new donation of ${donation.itemType} has been allocated to your organization, helping to fulfill one of your important requests!\nThank you for the incredible work you do.\n\n- The GoodsForGood Team`
+      `Hello ${ngo.name},\n\n` +
+      `We are excited to inform you that a new donation of ${donation.itemType} has been allocated to your organization, helping to fulfill one of your important requests!\n` +
+      `Thank you for the incredible work you do.\n\n` +
+      `- The GoodsForGood Team`
     );
 
     res.json({ message: "Donation allocated and notifications sent", donation });
@@ -164,8 +170,7 @@ const allocateDonation = async (req, res) => {
   }
 };
 
-// Get all open NGO needs (for admin)
-const getAllNGONeeds = async (req, res) => {
+export const getAllNGONeeds = async (req, res) => {
   try {
     const ngos = await NGO.find();
     const needs = [];
@@ -191,14 +196,11 @@ const getAllNGONeeds = async (req, res) => {
   }
 };
 
-// Get all donations made to a specific NGO
-const getPreviousDonations = async (req, res) => {
+export const getPreviousDonations = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const donations = await Donation.find({ ngoId: id })
-      .sort({ createdAt: -1 }); // Most recent first
-
+    const donations = await Donation.find({ ngoId: id }).sort({ createdAt: -1 });
     res.json(donations);
   } catch (error) {
     console.error("Error fetching previous donations:", error);
@@ -206,13 +208,14 @@ const getPreviousDonations = async (req, res) => {
   }
 };
 
-export {
-  registerNGO,
-  loginNGO,
-  requestItem,
-  getNGORequests,
-  confirmReceived,
-  allocateDonation,
-  getAllNGONeeds,
-  getPreviousDonations
+export const getNGODetails = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const ngo = await NGO.findById(id).select("name email");
+    if (!ngo) return res.status(404).json({ message: "NGO not found" });
+    res.json(ngo);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
