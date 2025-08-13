@@ -6,31 +6,35 @@ import {
   getNGORequests,
   confirmReceived,
   getAllNGONeeds,
-  allocateDonation
+  allocateDonation,
+  getNGODetails
 } from '../controllers/ngoController.js'
+import { protectAdmin } from '../middleware/adminMiddleware.js'
 
 const router = express.Router()
 
-// @route   POST /api/ngos/register (admin only, optional)
-router.post('/register', registerNGO)
+// Admin-only NGO registration
+router.post('/register', protectAdmin, registerNGO)
 
-// @route   POST /api/ngos/login
+// NGO login
 router.post('/login', loginNGO)
 
-// @route   POST /api/ngos/request
+// NGO requests an item
 router.post('/request', requestItem)
 
-// @route   GET /api/ngos/:id/requests
+// Get all requests for an NGO
 router.get('/:id/requests', getNGORequests)
 
-// @route   PUT /api/ngos/:ngoId/confirm/:donationId
+// NGO confirms item received
 router.put('/:ngoId/confirm/:donationId', confirmReceived)
 
-//@routes  GET /api/ngos/needs
-router.get('/needs', getAllNGONeeds);
+// Get all NGO needs (admin)
+router.get('/needs', getAllNGONeeds)
 
-// @route   POST /api/ngos/allocate
-// @desc    Admin allocates a specific donation to an NGO
-router.post('/allocate', allocateDonation);
+// Admin allocates donation to NGO
+router.post('/allocate', protectAdmin, allocateDonation)
+
+// Get NGO details by ID
+router.get('/:id', getNGODetails)
 
 export default router
