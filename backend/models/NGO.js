@@ -4,6 +4,8 @@ const ngoSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  address: String,  // Make sure this is defined
+  phone: String,     // Make sure this is defined
   requestHistory: [
     {
       itemType: String,
