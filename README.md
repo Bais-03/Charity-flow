@@ -20,7 +20,7 @@ GoodsForGood is a full-stack web application designed to manage non-monetary don
 
 ### **Tech Stack**
 
-  * **Frontend:** HTML, CSS, JavaScript (React.js)
+  * **Frontend:** HTML, CSS, JavaScript 
   * **Backend:** Node.js, Express.js
   * **Database:** MongoDB
   * **ODM:** Mongoose
